@@ -372,6 +372,7 @@ body.menu-open { overflow: hidden; }
 /* ---------- Grid / cards ---------- */
 .grid { display: grid; gap: 0 var(--spacing-48); }
 .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .grid--carousel {
   grid-auto-flow: column;
   grid-auto-columns: calc((100% - 2 * var(--spacing-48)) / 3);
@@ -609,7 +610,7 @@ body.menu-open { overflow: hidden; }
   .scroll-cue__arrow svg { transform: rotate(0); }
   .section__title { grid-template-columns: 1fr; grid-template-areas: "eyebrow" "heading" "controls"; gap: var(--spacing-24); }
   .section__controls { justify-self: end; }
-  .grid--3 { grid-template-columns: 1fr; }
+  .grid--3, .grid--2 { grid-template-columns: 1fr; row-gap: var(--spacing-48); }
   .grid--carousel { grid-auto-columns: 84%; }
   .eng { grid-template-columns: 1fr; gap: var(--spacing-32); }
   .interest { grid-template-columns: 1fr; gap: var(--spacing-32); margin-top: var(--spacing-64); }
