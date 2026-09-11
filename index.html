@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brendon Lock — Web, Engineering, Music</title>
+  <meta name="description" content="Personal portfolio of Brendon Lock: website development, mechanical engineering projects, and music. Cape Town, South Africa." />
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+    })();
+  </script>
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <div class="header__lockup">
+      <a href="#top" class="logo" aria-label="Brendon Lock — home"></a>
+      <p class="eyebrow header__eyebrow">Brendon Lock<br />Web // Engineering // Music</p>
+    </div>
+    <div class="header__actions">
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" data-theme-toggle>
+        <svg class="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6 13 13M3 13l1.4-1.4M11.6 4.4 13 3"/></svg>
+        <svg class="icon-moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7Z"/></svg>
+      </button>
+      <button class="pill pill--solid menu-btn" type="button" aria-expanded="false" aria-controls="menu">
+        <span data-label="Menu"></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="menu" id="menu" aria-label="Site navigation">
+    <ul class="menu__list">
+      <li><a href="#web" data-index="01">Web Development</a></li>
+      <li><a href="#engineering" data-index="02">Engineering</a></li>
+      <li><a href="#music" data-index="03">Music</a></li>
+      <li><a href="#about" data-index="04">About</a></li>
+      <li><a href="#contact" data-index="05">Contact</a></li>
+    </ul>
+    <p class="menu__meta eyebrow">Cape Town, South Africa · 2026</p>
+  </nav>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <h1 class="display hero__title" data-split>
+        <span class="line">Brendon</span>
+        <span class="line">Lock</span>
+      </h1>
+      <div class="hero__meta">
+        <p class="eyebrow">Web developer · Engineering student · Musician · Builds with AI</p>
+        <p class="hero__intro body">I build websites that feel considered, study how things are engineered, write music in the gaps, and use Claude to move faster at all three. Everything below is the record.</p>
+      </div>
+      <a href="#band" class="scroll-cue" aria-label="Scroll down">
+        <span class="scroll-cue__label eyebrow">Scroll</span>
+        <span class="scroll-cue__arrow" aria-hidden="true">
+          <svg viewBox="0 0 16 24" width="16" height="24" fill="none" stroke="currentColor" stroke-width="1"><path d="M8 1v21M2 16l6 6 6-6"/></svg>
+        </span>
+      </a>
+    </section>
+
+    <!-- ============ HERO IMAGE BAND ============ -->
+    <figure class="band" id="band" data-parallax>
+      <!-- Swap this placeholder for a full-bleed photograph:
+           <img src="images/hero.jpg" alt="..." class="band__img" /> -->
+      <div class="band__img band__img--placeholder" role="img" aria-label="Placeholder for a full-bleed hero photograph"></div>
+      <figcaption class="band__caption">
+        <p class="eyebrow eyebrow--light">Cape Town, South Africa</p>
+        <p class="heading-sm band__headline">Portfolio, 2026 — things made with hands, code, and sound.</p>
+      </figcaption>
+    </figure>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Websites</span><span class="dot"></span>
+        <span>Engineering</span><span class="dot"></span>
+        <span>Music</span><span class="dot"></span>
+        <span>AI</span><span class="dot"></span>
+        <span>Websites</span><span class="dot"></span>
+        <span>Engineering</span><span class="dot"></span>
+        <span>Music</span><span class="dot"></span>
+        <span>AI</span><span class="dot"></span>
+      </div>
+    </div>
+
+    <!-- ============ WEB DEVELOPMENT ============ -->
+    <section class="section" id="web">
+      <div class="section__title">
+        <p class="eyebrow" data-reveal>01 — Web Development</p>
+        <h2 class="heading" data-reveal data-split>Sites built to be read, not just loaded.</h2>
+        <div class="section__controls" data-reveal>
+          <button class="arrow" type="button" aria-label="Previous" data-carousel-prev="web">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.25"><path d="M10 3 5 8l5 5"/></svg>
+          </button>
+          <button class="arrow" type="button" aria-label="Next" data-carousel-next="web">
+            <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.25"><path d="m6 3 5 5-5 5"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid--carousel" data-carousel="web">
+        <article class="card" data-reveal>
+          <a href="https://alexxiofficial.com" class="card__link" target="_blank" rel="noopener">
+            <figure class="card__media card__media--teal card__media--left">
+              <img src="images/alexxi.jpg" alt="alexxiofficial.com homepage: Alexxi in sunglasses with links to shows, services, downloads, and discography" width="1600" height="1000" loading="lazy" />
+            </figure>
+            <div class="card__tags"><span class="tag">Live site</span><span class="tag tag--accent">2026</span></div>
+            <h3 class="subheading card__title">alexxiofficial.com</h3>
+            <p class="body-sm card__desc">The official website for music producer and DJ Alexxi. Designed and built end to end: a home for releases, mixes, and bookings that stays out of the music's way.</p>
+          </a>
+        </article>
+
+        <article class="card card--tint card--tint-mint" data-reveal>
+          <a href="https://github.com/brendonlock/portfolio" class="card__link" target="_blank" rel="noopener">
+            <p class="eyebrow">Also built · with Claude</p>
+            <h3 class="heading-sm card__title">This site. Written from a design system, built with Claude Code, no framework.</h3>
+            <p class="body-sm card__desc">I wrote the design spec, briefed Claude Code, and reviewed every pass. Plain HTML, CSS, and JavaScript with line-split headlines, parallax media, and a menu that curtains down.</p>
+            <span class="pill pill--outline card__cta">See the code on GitHub</span>
+          </a>
+        </article>
+
+        <article class="card" data-reveal>
+          <a href="#contact" class="card__link">
+            <figure class="card__media card__media--magenta">
+              <div class="ph ph--03" role="img" aria-label="Placeholder for the next project"></div>
+            </figure>
+            <div class="card__tags"><span class="tag">Open</span></div>
+            <h3 class="subheading card__title">Your site, next</h3>
+            <p class="body-sm card__desc">I take on a small number of websites a year for artists, studios, and small businesses. If you want something built with this much care, get in touch.</p>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ HOW I WORK ============ -->
+    <section class="section how" id="how">
+      <div class="section__title">
+        <p class="eyebrow" data-reveal>How I work</p>
+        <h2 class="heading" data-reveal data-split>Make it work. Then make it feel effortless.</h2>
+      </div>
+      <div class="how__grid how__grid--4">
+        <div class="how__col how__col--teal" data-reveal>
+          <p class="caption how__num">01</p>
+          <p class="subheading how__label">Web</p>
+          <p class="body-sm how__desc">Fast, readable sites for artists and small businesses. Built by hand, tested on slow phones, and handed over with nothing you don't need.</p>
+        </div>
+        <div class="how__col how__col--magenta" data-reveal>
+          <p class="caption how__num">02</p>
+          <p class="subheading how__label">Engineering</p>
+          <p class="body-sm how__desc">Second-year mechanical engineering at Stellenbosch University. Learning the fundamentals properly, and building things in between to see if they hold.</p>
+        </div>
+        <div class="how__col how__col--blue" data-reveal>
+          <p class="caption how__num">03</p>
+          <p class="subheading how__label">Music</p>
+          <p class="body-sm how__desc">Writing, producing, and mixing my own releases, and taking on production and mixing work for other artists through SoundBetter.</p>
+        </div>
+        <div class="how__col how__col--navy" data-reveal>
+          <p class="caption how__num">04</p>
+          <p class="subheading how__label">AI</p>
+          <p class="body-sm how__desc">I work with Claude daily: writing clear specs, briefing Claude Code, and checking its output like I'd check my own. This site went from a written design system to a live page that way.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ENGINEERING ============ -->
+    <section class="section" id="engineering">
+      <div class="section__title">
+        <p class="eyebrow" data-reveal>02 — Engineering</p>
+        <h2 class="heading" data-reveal data-split>Learning how things are made, and making some along the way.</h2>
+      </div>
+
+      <div class="grid grid--3">
+        <article class="card card--tint card--tint-blue" data-reveal>
+          <a href="https://www.linkedin.com/in/brendon-lock-6b38971bb" class="card__link" target="_blank" rel="noopener">
+            <p class="eyebrow">Currently</p>
+            <h3 class="heading-sm card__title">Second-year Mechanical Engineering, Stellenbosch University.</h3>
+            <p class="body-sm card__desc">Mechanics, thermodynamics, materials, and design. The projects beside this are what I build in between lectures.</p>
+            <span class="pill pill--outline card__cta">Connect on LinkedIn</span>
+          </a>
+        </article>
+
+        <article class="card" data-reveal>
+          <a href="#" class="card__link">
+            <figure class="card__media">
+              <!-- Placeholder project. Replace with a real build: <img src="images/project-1.jpg" alt="..." /> -->
+              <div class="ph ph--04" role="img" aria-label="Project photograph placeholder"></div>
+            </figure>
+            <div class="card__tags"><span class="tag">Personal project</span><span class="tag">Placeholder</span></div>
+            <h3 class="subheading card__title">Project one</h3>
+            <p class="body-sm card__desc">Swap this card for a real build: what it was, what it was for, and what you learned making it. Photos of the process work better than renders.</p>
+          </a>
+        </article>
+
+        <article class="card" data-reveal>
+          <a href="#" class="card__link">
+            <figure class="card__media card__media--magenta">
+              <!-- Placeholder project. Replace with a real build: <img src="images/project-2.jpg" alt="..." /> -->
+              <div class="ph ph--05" role="img" aria-label="Project photograph placeholder"></div>
+            </figure>
+            <div class="card__tags"><span class="tag">Coursework</span><span class="tag">Placeholder</span></div>
+            <h3 class="subheading card__title">Project two</h3>
+            <p class="body-sm card__desc">A design assignment, a workshop piece, or a CAD model you're proud of. Keep the description to three lines and let the image carry it.</p>
+          </a>
+        </article>
+      </div>
+
+      <!-- Process list — sticky title on the left, rows animate in -->
+      <div class="process" data-reveal>
+        <div class="process__aside">
+          <p class="eyebrow">Process</p>
+          <p class="heading-sm">Four steps, every time.</p>
+        </div>
+        <ol class="process__list">
+          <li class="process__row" data-reveal>
+            <span class="process__num caption">01</span>
+            <span class="process__label subheading">Define the constraint</span>
+            <span class="process__desc body-sm">Budget, size, load, deadline. The constraint is the design.</span>
+          </li>
+          <li class="process__row" data-reveal>
+            <span class="process__num caption">02</span>
+            <span class="process__label subheading">Prototype ugly</span>
+            <span class="process__desc body-sm">Cardboard, scrap, hot glue. Find out what's wrong before it's expensive.</span>
+          </li>
+          <li class="process__row" data-reveal>
+            <span class="process__num caption">03</span>
+            <span class="process__label subheading">Measure everything</span>
+            <span class="process__desc body-sm">If it isn't written down, it didn't happen. Test before the pretty version.</span>
+          </li>
+          <li class="process__row" data-reveal>
+            <span class="process__num caption">04</span>
+            <span class="process__label subheading">Document and finish</span>
+            <span class="process__desc body-sm">Drawings, notes, and a write-up someone else could build from.</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ MUSIC ============ -->
+    <section class="section" id="music">
+      <div class="section__title">
+        <p class="eyebrow" data-reveal>03 — Music</p>
+        <h2 class="heading" data-reveal data-split>Written late, mixed later.</h2>
+      </div>
+
+      <div class="music">
+        <figure class="music__cover" data-reveal data-parallax data-parallax-strength="0.5">
+          <img src="images/music.jpg" alt="Brendon Lock in a cap and white t-shirt, holding a glass of wine outside a white building at dusk" width="1200" height="1600" loading="lazy" />
+          <figcaption class="music__cover-caption">
+            <p class="eyebrow eyebrow--light">Artist</p>
+            <p class="heading-sm">Brendon Lock</p>
+          </figcaption>
+        </figure>
+
+        <div class="music__player">
+          <p class="eyebrow" data-reveal>Listen</p>
+          <div class="embed" data-reveal>
+            <iframe
+              title="Spotify player: Brendon Lock"
+              src="https://open.spotify.com/embed/artist/3voSlfB68zwQCn1ghDULJ8?theme=0"
+              width="100%" height="352" frameborder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"></iframe>
+          </div>
+          <div class="music__links" data-reveal>
+            <a class="pill pill--solid" href="https://open.spotify.com/artist/3voSlfB68zwQCn1ghDULJ8" target="_blank" rel="noopener">Spotify</a>
+            <a class="pill pill--solid" href="https://soundcloud.com/brendonlockmusic" target="_blank" rel="noopener">SoundCloud</a>
+            <a class="pill pill--solid" href="https://soundbetter.com/profiles/659867-brendon-lock" target="_blank" rel="noopener">SoundBetter</a>
+          </div>
+          <p class="body-sm music__note" data-reveal>Available for production, mixing, and session work through SoundBetter.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section about" id="about">
+      <div class="about__grid">
+        <div class="about__text">
+          <p class="eyebrow" data-reveal>04 — About</p>
+          <h2 class="heading" data-reveal data-split>One person, three disciplines, the same taste.</h2>
+          <p class="body about__para" data-reveal>I'm Brendon, from Cape Town, South Africa. I'm in my second year of mechanical engineering at Stellenbosch University, I build websites on the side, and I've never really put the guitar down. Across all of it I work with AI, mostly Claude, as a tool for thinking and building faster without lowering the bar. The through-line in everything here is restraint: the fewest parts that do the job, and the care to make those parts feel finished.</p>
+          <p class="body about__para" data-reveal>I take on a small number of web projects a year around my studies, and release music when it's ready. If you're working on something considered, I'd like to hear about it.</p>
+        </div>
+        <figure class="about__portrait" data-reveal data-parallax data-parallax-strength="0.35">
+          <!-- Swap for a portrait: <img src="images/portrait.jpg" alt="Brendon Lock" /> -->
+          <div class="ph ph--07" role="img" aria-label="Portrait placeholder"></div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact">
+      <p class="eyebrow" data-reveal>05 — Contact</p>
+      <a href="mailto:brendonlock04@gmail.com" class="display contact__email" data-reveal data-split>Say hello.</a>
+      <p class="body contact__note" data-reveal>brendonlock04@gmail.com — or find me on the links below.</p>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer__cols">
+      <div class="footer__col">
+        <p class="eyebrow">Work</p>
+        <a href="#web">Web Development</a>
+        <a href="#engineering">Engineering</a>
+        <a href="#music">Music</a>
+      </div>
+      <div class="footer__col">
+        <p class="eyebrow">Elsewhere</p>
+        <a href="https://github.com/brendonlock" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/brendon-lock-6b38971bb" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.instagram.com/brendonlockmusic/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+      <div class="footer__col">
+        <p class="eyebrow">Listen</p>
+        <a href="https://open.spotify.com/artist/3voSlfB68zwQCn1ghDULJ8" target="_blank" rel="noopener">Spotify</a>
+        <a href="https://soundcloud.com/brendonlockmusic" target="_blank" rel="noopener">SoundCloud</a>
+        <a href="https://soundbetter.com/profiles/659867-brendon-lock" target="_blank" rel="noopener">SoundBetter</a>
+      </div>
+      <div class="footer__col footer__col--meta">
+        <p class="eyebrow">Brendon Lock</p>
+        <p class="body-sm footer__meta">Cape Town, South Africa<br />© 2026.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
