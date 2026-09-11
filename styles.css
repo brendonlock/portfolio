@@ -442,13 +442,11 @@ body.menu-open { overflow: hidden; }
 .how__num { color: var(--text-2); margin-bottom: var(--spacing-16); }
 .how__desc { color: var(--text-2); max-width: 36ch; }
 
-/* ---------- Process list ---------- */
-.process {
-  display: grid; grid-template-columns: 1fr 2fr; gap: var(--spacing-48);
-  margin-top: var(--spacing-112);
-  align-items: start;
-}
-.process__aside { position: sticky; top: calc(var(--spacing-64) + 40px); display: flex; flex-direction: column; gap: var(--spacing-16); }
+/* ---------- Engineering: card + process list ---------- */
+.eng { display: grid; grid-template-columns: 1fr 2fr; gap: var(--spacing-48); align-items: start; }
+.eng__card { min-height: 100%; }
+.process { display: flex; flex-direction: column; gap: var(--spacing-32); }
+.process__aside { display: flex; flex-direction: column; gap: var(--spacing-16); }
 .process__row {
   display: grid; grid-template-columns: 48px 1fr 1.4fr; gap: var(--spacing-24);
   padding: var(--spacing-24) 0;
@@ -570,6 +568,7 @@ body.menu-open { overflow: hidden; }
    ========================================================================== */
 @media (max-width: 1024px) {
   .grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--spacing-48); }
+  .eng { grid-template-columns: 1fr; }
   .grid--carousel { grid-auto-columns: calc((100% - var(--spacing-48)) / 2); }
   .how__grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-48); }
   .footer__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -589,8 +588,7 @@ body.menu-open { overflow: hidden; }
   .section__controls { justify-self: end; }
   .grid--3 { grid-template-columns: 1fr; }
   .grid--carousel { grid-auto-columns: 84%; }
-  .process { grid-template-columns: 1fr; gap: var(--spacing-32); margin-top: var(--spacing-64); }
-  .process__aside { position: static; }
+  .eng { grid-template-columns: 1fr; gap: var(--spacing-32); }
   .process__row { grid-template-columns: 40px 1fr; }
   .process__desc { grid-column: 2; }
   .music { grid-template-columns: 1fr; gap: var(--spacing-32); }
