@@ -70,6 +70,7 @@
   --line: var(--color-ash);
   --line-soft: color-mix(in srgb, var(--color-ash) 45%, transparent);
   --accent-4: var(--color-navy-ink);
+  --liquid-blue: #3d6194; /* the steel blue in the hero liquid */
   color-scheme: light;
 }
 
@@ -81,6 +82,7 @@
   --line: #45443f;
   --line-soft: rgba(255, 254, 247, 0.14);
   --accent-4: var(--color-signal-yellow);
+  --liquid-blue: var(--color-powder-blue);
   --surface-canvas: #1b1a18;
   color-scheme: dark;
 }
@@ -350,8 +352,7 @@ body.menu-open { overflow: hidden; }
   will-change: transform;
   animation: marquee 32s linear infinite;
 }
-.marquee__track .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--color-magenta-bloom); flex: none; }
-.marquee__track .dot:nth-of-type(even) { background: var(--color-forest-teal); }
+.marquee__track .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--liquid-blue); flex: none; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ---------- Sections ---------- */
