@@ -73,10 +73,9 @@
     </section>
 
     <!-- ============ HERO IMAGE BAND ============ -->
-    <figure class="band" id="band" data-parallax>
-      <!-- Swap this placeholder for a full-bleed photograph:
-           <img src="images/hero.jpg" alt="..." class="band__img" /> -->
-      <div class="band__img band__img--placeholder" role="img" aria-label="Placeholder for a full-bleed hero photograph"></div>
+    <figure class="band" id="band">
+      <div class="band__img band__img--placeholder" aria-hidden="true"></div>
+      <canvas class="band__liquid" aria-hidden="true"></canvas>
       <figcaption class="band__caption">
         <p class="eyebrow eyebrow--light">Cape Town, South Africa</p>
         <p class="heading-sm band__headline">Portfolio, 2026 — things made with hands, code, and sound.</p>
@@ -332,5 +331,6 @@
   </footer>
 
   <script src="script.js" defer></script>
+  <script src="liquid.js" defer></script>
 </body>
 </html>

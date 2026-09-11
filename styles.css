@@ -312,10 +312,16 @@ body.menu-open { overflow: hidden; }
 /* ---------- Full-bleed band ---------- */
 .band { position: relative; overflow: hidden; width: 100%; height: clamp(360px, 78vh, 820px); }
 .band__img {
-  position: absolute; inset: -12% 0; width: 100%; height: 124%;
+  position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover;
-  will-change: transform;
 }
+.band__liquid {
+  position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+  opacity: 0; transition: opacity 1200ms var(--ease-out);
+  touch-action: pan-y;
+}
+.band__liquid.is-ready { opacity: 1; }
+.band__caption { pointer-events: none; }
 .band__img--placeholder {
   background:
     radial-gradient(120% 80% at 80% 20%, var(--color-powder-blue) 0%, transparent 55%),
