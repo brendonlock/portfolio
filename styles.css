@@ -81,8 +81,8 @@
   --text-2: #a9a7a1;
   --line: #45443f;
   --line-soft: rgba(255, 254, 247, 0.14);
-  --accent-4: var(--color-signal-yellow);
   --liquid-blue: var(--color-powder-blue);
+  --accent-4: var(--liquid-blue);
   --surface-canvas: #1b1a18;
   color-scheme: dark;
 }
@@ -162,7 +162,7 @@ h1, h2, h3, p { margin: 0; }
   border: 1px solid var(--line);
   background: transparent;
 }
-.tag--accent { background: var(--color-signal-yellow); border-color: var(--color-signal-yellow); color: var(--color-ink-black); }
+.tag--accent { background: var(--liquid-blue); border-color: var(--liquid-blue); color: var(--canvas); }
 
 .arrow {
   width: 32px; height: 32px;
