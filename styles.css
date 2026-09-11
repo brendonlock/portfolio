@@ -71,6 +71,7 @@
   --line-soft: color-mix(in srgb, var(--color-ash) 45%, transparent);
   --accent-4: var(--color-navy-ink);
   --liquid-blue: #3d6194; /* the steel blue in the hero liquid */
+  --blue-step-1: #101731; --blue-step-2: #27446e; --blue-step-3: #3d6194; --blue-step-4: #a5c8eb;
   color-scheme: light;
 }
 
@@ -83,6 +84,7 @@
   --line-soft: rgba(255, 254, 247, 0.14);
   --liquid-blue: var(--color-powder-blue);
   --accent-4: var(--liquid-blue);
+  --blue-step-1: #3d6194; --blue-step-2: #6b93c4; --blue-step-3: #a5c8eb; --blue-step-4: #d6e4f4;
   --surface-canvas: #1b1a18;
   color-scheme: dark;
 }
@@ -444,10 +446,11 @@ body.menu-open { overflow: hidden; }
 .how { padding-bottom: var(--spacing-48); }
 .how__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--spacing-48); margin-top: var(--spacing-32); }
 .how__col { padding-top: var(--spacing-24); border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: var(--spacing-8); }
-.how__col--teal { border-top-color: var(--color-forest-teal); }
-.how__col--magenta { border-top-color: var(--color-magenta-bloom); }
-.how__col--blue { border-top-color: var(--color-powder-blue); }
-.how__col--navy { border-top-color: var(--accent-4); }
+/* Four steps of the liquid band's blue, dark to light. */
+.how__col--teal    { border-top-color: var(--blue-step-1); }
+.how__col--magenta { border-top-color: var(--blue-step-2); }
+.how__col--blue    { border-top-color: var(--blue-step-3); }
+.how__col--navy    { border-top-color: var(--blue-step-4); }
 .how__grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--spacing-32); }
 .how__num { color: var(--text-2); margin-bottom: var(--spacing-16); }
 .how__desc { color: var(--text-2); max-width: 36ch; }
