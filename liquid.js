@@ -54,7 +54,7 @@
       vec2 m = vec2(u_mouse.x * aspect, u_mouse.y);
       vec2 dm = p - m;
       float well = exp(-dot(dm, dm) * 1.8) * u_strength;
-      float speed = min(length(u_vel) * 10.0, 1.0);
+      float speed = min(length(u_vel) * 7.0, 1.0);
       vec2 swirl = vec2(-dm.y, dm.x) * speed;
 
       // Twirls: two slow vortices that wander, and one under the pointer.
@@ -62,8 +62,8 @@
       vec2 c2 = vec2(aspect * (0.72 + 0.16 * cos(t * 1.3 + 2.0)), 0.40 + 0.20 * sin(t * 0.9 + 1.0));
       p = twirl(p, c1,  2.4 + 0.6 * sin(t * 2.3), 0.55);
       p = twirl(p, c2, -2.0 + 0.5 * cos(t * 1.9), 0.40);
-      p = twirl(p, m, (1.6 + 3.0 * speed) * u_strength, 0.35);
-      p += (dm * 0.10 + swirl * 0.35) * well;
+      p = twirl(p, m, (0.9 + 1.6 * speed) * u_strength, 0.32);
+      p += (dm * 0.07 + swirl * 0.22) * well;
 
       // Slow viscous flow field so the whole sheet drifts on its own.
       p += 0.22 * vec2(sin(p.y * 1.1 + t * 2.0), cos(p.x * 0.9 - t * 1.6));
@@ -72,7 +72,7 @@
       vec2 q = vec2(fbm(p * 0.45 + t), fbm(p * 0.45 - t * 0.7 + 3.1));
       vec2 r = vec2(fbm(p * 0.6 + 1.6 * q + vec2(1.7, 9.2) + t * 0.5),
                     fbm(p * 0.6 + 1.6 * q + vec2(8.3, 2.8) - t * 0.4));
-      r += (dm * 0.25 + swirl * 0.5) * well;
+      r += (dm * 0.16 + swirl * 0.32) * well;
       float n = fbm(p * 0.5 + 2.4 * r);
 
       // Long diagonal silk folds, bent by the warp. Drift is slow.
@@ -80,7 +80,7 @@
       float folds = 0.5 + 0.5 * sin(phase);
       float sheen = pow(folds, 3.0);
       float mask = smoothstep(0.32, 0.78, n + 0.15 + 0.25 * uv.x);
-      float v = sheen * mask + well * 0.06;
+      float v = sheen * mask + well * 0.04;
 
       vec3 black  = vec3(0.0);
       vec3 navy   = vec3(0.05, 0.08, 0.17);
@@ -145,7 +145,7 @@
     const r = band.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width;
     const y = 1 - (e.clientY - r.top) / r.height;
-    if (last) { impulse.x += (x - last.x) * 0.6; impulse.y += (y - last.y) * 0.6; }
+    if (last) { impulse.x += (x - last.x) * 0.45; impulse.y += (y - last.y) * 0.45; }
     last = { x, y };
     target.x = x; target.y = y; target.s = 1;
   }, { passive: true });
