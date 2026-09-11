@@ -36,6 +36,14 @@
       return v;
     }
 
+    // Rotate the field around a centre; falls off with distance.
+    vec2 twirl(vec2 p, vec2 c, float strength, float radius) {
+      vec2 d = p - c;
+      float a = strength * exp(-dot(d, d) / radius);
+      float s = sin(a), k = cos(a);
+      return c + mat2(k, -s, s, k) * d;
+    }
+
     void main() {
       vec2 uv = gl_FragCoord.xy / u_res;
       float aspect = u_res.x / u_res.y;
@@ -48,17 +56,24 @@
       float well = exp(-dot(dm, dm) * 1.8) * u_strength;
       float speed = min(length(u_vel) * 10.0, 1.0);
       vec2 swirl = vec2(-dm.y, dm.x) * speed;
+
+      // Twirls: two slow vortices that wander, and one under the pointer.
+      vec2 c1 = vec2(aspect * (0.38 + 0.18 * sin(t * 1.7)), 0.55 + 0.22 * cos(t * 1.1));
+      vec2 c2 = vec2(aspect * (0.72 + 0.16 * cos(t * 1.3 + 2.0)), 0.40 + 0.20 * sin(t * 0.9 + 1.0));
+      p = twirl(p, c1,  2.4 + 0.6 * sin(t * 2.3), 0.55);
+      p = twirl(p, c2, -2.0 + 0.5 * cos(t * 1.9), 0.40);
+      p = twirl(p, m, (1.6 + 3.0 * speed) * u_strength, 0.35);
       p += (dm * 0.10 + swirl * 0.35) * well;
 
       // Slow viscous flow field so the whole sheet drifts on its own.
-      p += 0.18 * vec2(sin(p.y * 1.1 + t * 2.0), cos(p.x * 0.9 - t * 1.6));
+      p += 0.22 * vec2(sin(p.y * 1.1 + t * 2.0), cos(p.x * 0.9 - t * 1.6));
 
       // Deep domain warp, low frequency: long smooth sheets.
       vec2 q = vec2(fbm(p * 0.45 + t), fbm(p * 0.45 - t * 0.7 + 3.1));
       vec2 r = vec2(fbm(p * 0.6 + 1.6 * q + vec2(1.7, 9.2) + t * 0.5),
                     fbm(p * 0.6 + 1.6 * q + vec2(8.3, 2.8) - t * 0.4));
       r += (dm * 0.25 + swirl * 0.5) * well;
-      float n = fbm(p * 0.5 + 2.0 * r);
+      float n = fbm(p * 0.5 + 2.4 * r);
 
       // Long diagonal silk folds, bent by the warp. Drift is slow.
       float phase = (p.x * 1.0 - p.y * 1.5) * 2.6 + n * 7.0 + t * 0.8;
