@@ -252,7 +252,7 @@ h1, h2, h3, p { margin: 0; }
   visibility: hidden;
 }
 .menu.is-open { clip-path: inset(0 0 0 0); visibility: visible; }
-.menu__list li { overflow: hidden; }
+.menu__list li { overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
 .menu__list a {
   display: flex; align-items: baseline; gap: var(--spacing-24);
   font-size: clamp(40px, 8vw, 84px);
@@ -555,7 +555,7 @@ body.menu-open { overflow: hidden; }
 [data-reveal].is-visible { opacity: 1; transform: none; }
 
 /* Line-split headline reveal (script wraps each line in .line > .line__inner) */
-[data-split] .line { display: block; overflow: hidden; }
+[data-split] .line { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
 [data-split] .line__inner {
   display: block;
   transform: translateY(110%);
