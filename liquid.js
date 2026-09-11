@@ -20,6 +20,7 @@
     uniform float u_time;
     uniform vec2  u_mouse;     // 0..1, y up
     uniform float u_strength;  // 0..1 pointer influence
+    uniform vec2  u_vel;       // eased pointer velocity
 
     float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }
     float noise(vec2 p) {
@@ -39,27 +40,32 @@
       vec2 uv = gl_FragCoord.xy / u_res;
       float aspect = u_res.x / u_res.y;
       vec2 p = vec2(uv.x * aspect, uv.y);
-      float t = u_time * 0.045;
+      float t = u_time * 0.028;
 
-      // Pointer: a broad, soft well that pushes the folds.
+      // Pointer: broad soft well, plus a swirl driven by pointer velocity.
       vec2 m = vec2(u_mouse.x * aspect, u_mouse.y);
       vec2 dm = p - m;
-      float well = exp(-dot(dm, dm) * 2.2) * u_strength;
+      float well = exp(-dot(dm, dm) * 1.8) * u_strength;
+      float speed = min(length(u_vel) * 10.0, 1.0);
+      vec2 swirl = vec2(-dm.y, dm.x) * speed;
+      p += (dm * 0.10 + swirl * 0.35) * well;
 
-      // Gentle domain warp: low frequency so the sheets stay long and smooth.
-      vec2 q = vec2(fbm(p * 0.55 + t), fbm(p * 0.55 - t * 0.6 + 3.1));
-      vec2 r = vec2(fbm(p * 0.7 + 1.1 * q + vec2(1.7, 9.2) + t * 0.5),
-                    fbm(p * 0.7 + 1.1 * q + vec2(8.3, 2.8) - t * 0.35));
-      r += dm * well * 0.35;
-      float n = fbm(p * 0.6 + 1.6 * r);
+      // Slow viscous flow field so the whole sheet drifts on its own.
+      p += 0.18 * vec2(sin(p.y * 1.1 + t * 2.0), cos(p.x * 0.9 - t * 1.6));
 
-      // Long diagonal silk folds. Few of them, softly bent.
-      float phase = (p.x * 1.0 - p.y * 1.5) * 3.2 + n * 5.5 + t * 1.2 + well * 2.5;
+      // Deep domain warp, low frequency: long smooth sheets.
+      vec2 q = vec2(fbm(p * 0.45 + t), fbm(p * 0.45 - t * 0.7 + 3.1));
+      vec2 r = vec2(fbm(p * 0.6 + 1.6 * q + vec2(1.7, 9.2) + t * 0.5),
+                    fbm(p * 0.6 + 1.6 * q + vec2(8.3, 2.8) - t * 0.4));
+      r += (dm * 0.25 + swirl * 0.5) * well;
+      float n = fbm(p * 0.5 + 2.0 * r);
+
+      // Long diagonal silk folds, bent by the warp. Drift is slow.
+      float phase = (p.x * 1.0 - p.y * 1.5) * 2.6 + n * 7.0 + t * 0.8;
       float folds = 0.5 + 0.5 * sin(phase);
-      float sheen = pow(folds, 3.5);
-      // Mask so most of the canvas stays black, with a few broad lit sheets.
-      float mask = smoothstep(0.35, 0.75, n + 0.15 + 0.25 * uv.x);
-      float v = sheen * mask + well * 0.07;
+      float sheen = pow(folds, 3.0);
+      float mask = smoothstep(0.32, 0.78, n + 0.15 + 0.25 * uv.x);
+      float v = sheen * mask + well * 0.06;
 
       vec3 black  = vec3(0.0);
       vec3 navy   = vec3(0.05, 0.08, 0.17);
@@ -69,7 +75,6 @@
       col = mix(col, steel,  smoothstep(0.26, 0.62, v));
       col = mix(col, powder, smoothstep(0.58, 1.0, v));
 
-      // Light falls from the upper right, like the reference.
       col *= 0.7 + 0.5 * smoothstep(0.0, 1.0, uv.x * 0.75 + uv.y * 0.25);
       gl_FragColor = vec4(col, 1.0);
     }`;
@@ -98,6 +103,7 @@
   const uTime = gl.getUniformLocation(prog, 'u_time');
   const uMouse = gl.getUniformLocation(prog, 'u_mouse');
   const uStrength = gl.getUniformLocation(prog, 'u_strength');
+  const uVel = gl.getUniformLocation(prog, 'u_vel');
 
   // Render at a reduced resolution: the field is soft, so it costs nothing visually.
   const SCALE = 0.5;
@@ -115,27 +121,36 @@
   // Pointer state, eased toward the target for a liquid feel.
   const target = { x: 0.72, y: 0.6, s: 0 };
   const cur = { x: 0.72, y: 0.6, s: 0 };
+  const vel = { x: 0, y: 0 };        // eased velocity sent to the shader
+  const impulse = { x: 0, y: 0 };    // raw velocity from the last pointer event, decays
+  let last = null;
   let visible = true, raf = 0, start = performance.now();
 
   band.addEventListener('pointermove', (e) => {
     const r = band.getBoundingClientRect();
-    target.x = (e.clientX - r.left) / r.width;
-    target.y = 1 - (e.clientY - r.top) / r.height;
-    target.s = 1;
+    const x = (e.clientX - r.left) / r.width;
+    const y = 1 - (e.clientY - r.top) / r.height;
+    if (last) { impulse.x += (x - last.x) * 0.6; impulse.y += (y - last.y) * 0.6; }
+    last = { x, y };
+    target.x = x; target.y = y; target.s = 1;
   }, { passive: true });
-  band.addEventListener('pointerleave', () => { target.s = 0; });
+  band.addEventListener('pointerleave', () => { target.s = 0; last = null; });
 
   function frame(now) {
     raf = 0;
     if (!visible) return;
     resize();
-    const k = 0.06;
+    const k = 0.045;
     cur.x += (target.x - cur.x) * k;
     cur.y += (target.y - cur.y) * k;
     cur.s += (target.s - cur.s) * k * 0.8;
+    vel.x += (impulse.x - vel.x) * 0.08;
+    vel.y += (impulse.y - vel.y) * 0.08;
+    impulse.x *= 0.9; impulse.y *= 0.9;
     gl.uniform1f(uTime, (now - start) / 1000);
     gl.uniform2f(uMouse, cur.x, cur.y);
     gl.uniform1f(uStrength, cur.s);
+    gl.uniform2f(uVel, vel.x, vel.y);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     if (!reduceMotion) raf = requestAnimationFrame(frame);
   }
